@@ -15,10 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  position: relative;
   min-height: 100vh;
-  width: 87vw;
-  left: 13vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +27,6 @@
 .App-link {
   color: #61dafb;
 }
-
 .Button1 {
   position: relative;
   top: 20px;
@@ -41,37 +37,19 @@
   min-height: 5vh;
   min-width: 10vw;
   transition: background-color 0.35s ease, border-color 0.35s ease;
-
+ 
 }
-
 .Button1:hover {
   background-color: darkblue;
   border-color: darkblue;
   /* New background color on hover */
 }
-.LogOutButton{
-  position: relative;
-  top: 50px;
-}
-/* Page transition styles */
-.page-enter {
-  opacity: 0;
-  transform: scale(0.9);
-}
 
-.page-enter-active {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 300ms, transform 300ms;
-}
-
-.page-exit {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.page-exit-active {
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 300ms, transform 300ms;
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

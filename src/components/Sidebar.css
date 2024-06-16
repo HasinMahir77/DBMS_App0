@@ -1,0 +1,56 @@
+.sidebar {
+    height: 100vh;
+    /* Full height */
+    width: 13vw;
+    /* Sidebar width */
+    position: fixed;
+    /* Fixed sidebar (stay in place on scroll) */
+    top: 0;
+    /* Stay at the top */
+    left: 0;
+    /* Stay at the left */
+    background-color: rgb(0, 123, 255);
+    /* Sidebar background color */
+    padding-top: 20px;
+    /* Padding at the top */
+    font-size: 20px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-color: rgb(0, 123, 255);
+}
+
+.sidebar ul {
+    list-style-type: none;
+    /* Remove default list styling */
+    padding: 0;
+    /* Remove padding */
+}
+
+.sidebar ul li {
+    padding: 8px;
+    text-align: center;
+}
+
+.sidebar ul li a {
+    color: white;
+    /* Link color */
+    text-decoration: none;
+    /* Remove underline from links */
+    display: block;
+    /* Make links block elements */
+    min-height: 40px;
+    border-radius: 10px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #0056b3 ;
+    /* Darken background on hover */
+}
+.SignOutLink{
+    position: relative;
+    bottom: 20px;
+}
+.loginButton{
+    position: relative;
+    top: 20px;
+}

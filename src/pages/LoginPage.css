@@ -1,0 +1,19 @@
+
+.login-page{
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(44, 44, 44);
+  gap: 10px;
+}
+.passwordInput{
+    width: 2vw;
+}
+.loginButton{
+    position: relative;
+    width: 7vw;
+}
