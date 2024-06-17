@@ -21,7 +21,7 @@ function Sidebar({ authenticateFunction }) {
     <div className="sidebar">
       <img
         className="logo"
-        src={require('./vaccineLogo.png')}
+        src={require('../images/vaccineLogo.png')}
       />
       <button className="homeButton" onClick={handleHomeButton}>
         Home

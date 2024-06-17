@@ -16,11 +16,8 @@
     font-size: 20px;
     padding-left: 0px;
     display: flex;
-    flex-direction: column;
- /* (56,60,76) */
-    
+    flex-direction: column; 
 }
-
 .sidebar button {
     list-style-type: none;
     /* Remove default list styling */
@@ -31,52 +28,19 @@
     border: none;
     height: 8vh;
     color: white;
-   
 }
 .sidebar button:hover {
-   
-    background-color: rgb(56,60,76);
-    
-   
+    background-color: rgb(56,60,76); 
 }
-
-.sidebar ul li {
-    padding: 8px;
-    text-align: center;
-    position: relative;
-    left: 0px;
-}
-
-.sidebar ul li a {
-    color: white;
-    /* Link color */
-    text-decoration: none;
-    /* Remove underline from links */
-    display: block;
-    /* Make links block elements */
-    min-height: 5vh;
-    border-radius: 10px;
-    position: relative;
-    left: 0;
-}
-
-.sidebar ul li :hover {
-    background-color: #0056b3 ;
-    /* Darken background on hover */
-}
-.SignOutLink{
-    position: relative;
-    bottom: 20px;
-}
-.logoutbutton{
-    position: relative;
-    top: 20px;
-    width: 15vw !important;
+.logoutButton{
+    position: fixed;
+    margin-top: 75vh;
+    align-self: center;
+    width: 15vw;
 }
 .logo{
     width: 7vw;
     height: 7vw;
     align-self: center;
     margin-bottom: 5vh;
-
 }

@@ -1,0 +1,34 @@
+.footer{
+    background-color: rgb(56,68,84);
+    position: fixed;
+    margin-top: auto;
+    height: 10vh;
+    width: 100vw;
+    bottom: 0px;
+    display: flex;
+    flex-direction: row;
+    row-gap: 10px;
+    justify-content: space-around;
+    align-items: center;
+   
+}
+.iubLogo{
+    height: 8vh;
+    position: fixed;
+    left: 6vw;
+    background-color: whitesmoke;
+}
+.aboutDiv{
+    position: fixed;
+
+}
+.socials{
+    position: fixed;
+    right: 5vw;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+   
+
+}

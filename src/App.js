@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -15,9 +15,15 @@ import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
 import Sidebar from "./components/Sidebar";
+import Footer
+ from "./components/Footer";
 import "./App.css";
 
 function App() {
+  useEffect(() => {
+    document.title = "Vaccination";
+  }, []);
+
   const [isAuthenticated, setIsAuthenticated] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
@@ -76,6 +82,7 @@ function App() {
           </CSSTransition>
         </TransitionGroup>
       </div>
+      <Footer></Footer>
     </div>
   );
 }
