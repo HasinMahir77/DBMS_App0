@@ -24,11 +24,11 @@ function Sidebar({ authenticateFunction }) {
         src={require('../images/vaccineLogo.png')}
       />
       <button className="homeButton" onClick={handleHomeButton}>
-        Home
+        Dashboard
       </button>
-      <button>Contacts</button>
-      <button onClick={handleAboutButton}>About</button>
       <button>Vaccination</button>
+      <button onClick={handleAboutButton}>Profile</button>
+      <button>Medical Data</button>
       <button className="logoutButton" onClick={handleLogoutButton}>
         Logout
       </button>
