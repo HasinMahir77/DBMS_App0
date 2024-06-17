@@ -1,7 +1,7 @@
 .sidebar {
     height: 100vh;
     /* Full height */
-    width: 13vw;
+    width: 15vw;
     /* Sidebar width */
     position: fixed;
     /* Fixed sidebar (stay in place on scroll) */
@@ -9,26 +9,42 @@
     /* Stay at the top */
     left: 0;
     /* Stay at the left */
-    background-color: rgb(0, 123, 255);
+    background-color: rgb(56,68,84);
     /* Sidebar background color */
     padding-top: 20px;
     /* Padding at the top */
     font-size: 20px;
-    border-bottom-right-radius: 10px;
-    border-top-right-radius: 10px;
-    border-color: rgb(0, 123, 255);
+    padding-left: 0px;
+    display: flex;
+    flex-direction: column;
+ /* (56,60,76) */
+    
 }
 
-.sidebar ul {
+.sidebar button {
     list-style-type: none;
     /* Remove default list styling */
     padding: 0;
     /* Remove padding */
+    background-color: rgb(56,68,84);
+    outline: none;
+    border: none;
+    height: 8vh;
+    color: white;
+   
+}
+.sidebar button:hover {
+   
+    background-color: rgb(56,60,76);
+    
+   
 }
 
 .sidebar ul li {
     padding: 8px;
     text-align: center;
+    position: relative;
+    left: 0px;
 }
 
 .sidebar ul li a {
@@ -38,11 +54,13 @@
     /* Remove underline from links */
     display: block;
     /* Make links block elements */
-    min-height: 40px;
+    min-height: 5vh;
     border-radius: 10px;
+    position: relative;
+    left: 0;
 }
 
-.sidebar ul li a:hover {
+.sidebar ul li :hover {
     background-color: #0056b3 ;
     /* Darken background on hover */
 }
@@ -50,7 +68,15 @@
     position: relative;
     bottom: 20px;
 }
-.loginButton{
+.logoutbutton{
     position: relative;
     top: 20px;
+    width: 15vw !important;
+}
+.logo{
+    width: 7vw;
+    height: 7vw;
+    align-self: center;
+    margin-bottom: 5vh;
+
 }

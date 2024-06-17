@@ -16,36 +16,38 @@ function LoginPage({ onLogin }) {
   };
   return (
     <div className="login-page">
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username</label>
-          <input
-            type="text"
-            value={username}
-            placeholder='Username'
-            className={"form-control usernameInput"}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder='Password'
-            className={"form-control passwordInput"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button
-          type="submit"
-          onClick={handleSubmit}
-          className={`btn btn-primary loginButton`}
-        >
-          Login
-        </button>
-      </form>
+      <div className='loginWindow'>
+        <h1>Login</h1>
+        <form className='loginForm' onSubmit={handleSubmit}>
+          
+            <label>Username</label>
+            <input
+              type="text"
+              value={username}
+              placeholder="Username"
+              className={"form-control usernameInput"}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          
+          
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="Password"
+              className={"form-control passwordInput"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className={`btn btn-primary loginButton`}
+          >
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

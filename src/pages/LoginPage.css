@@ -11,9 +11,30 @@
   gap: 10px;
 }
 .passwordInput{
-    width: 2vw;
+    
 }
 .loginButton{
     position: relative;
     width: 7vw;
+    margin-top: 20px;
+}
+.loginWindow{
+  display: flex;
+  flex-direction: column;
+  width: 25vw;
+  height: 45vh;
+  padding: 25px;
+  border-radius: 15px;
+  border: 1px solid grey;
+  
+
+  
+}
+.loginForm{
+  gap: 50px;
+  justify-content: space-between ;
+  padding: 10px;
+}
+.usernameInput{
+  margin-bottom: 20px;
 }

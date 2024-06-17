@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #ffffff !important;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,6 +22,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  position: relative;
+  left: 15vw !important ;
+  width: 85vw !important;
+
+  
 }
 
 .App-link {
@@ -37,6 +42,8 @@
   min-height: 5vh;
   min-width: 10vw;
   transition: background-color 0.35s ease, border-color 0.35s ease;
+  border: none;
+  outline: none;
  
 }
 .Button1:hover {

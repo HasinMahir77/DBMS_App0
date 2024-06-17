@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      {isAuthenticated && <Sidebar />}
+      {isAuthenticated && <Sidebar authenticateFunction={setIsAuthenticated} />}
       <div className="main-content">
         <TransitionGroup>
           <CSSTransition
