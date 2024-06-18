@@ -9,12 +9,13 @@ import {
   Link
 } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import HomePage from "./pages/Page2";
+import DashboardPage from "./pages/DashboardPage";
 import ContactPage from "./pages/ContactPage";
 import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
 import Sidebar from "./components/Sidebar";
+import SidebarRight from "./components/SidebarRight";
 import Footer
  from "./components/Footer";
 import "./App.css";
@@ -36,6 +37,7 @@ function App() {
   return (
     <div className="App">
       {isAuthenticated && <Sidebar authenticateFunction={setIsAuthenticated} />}
+      {isAuthenticated && <SidebarRight/>}
       <div className="main-content">
         <TransitionGroup>
           <CSSTransition
@@ -47,7 +49,7 @@ function App() {
               <Route
                 path="/"
                 element={
-                  isAuthenticated ? <HomePage /> : <Navigate to="/login" />
+                  isAuthenticated ? <DashboardPage /> : <Navigate to="/login" />
                 }
               />
               <Route
@@ -72,7 +74,7 @@ function App() {
                 path="/login"
                 element={
                   isAuthenticated ? (
-                    <HomePage />
+                    <DashboardPage />
                   ) : (
                     <LoginPage onLogin={handleLoginComplete} />
                   )

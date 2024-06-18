@@ -1,0 +1,8 @@
+.sidebarRight{
+    height: 90vh;
+    width: 5vw;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    background-color: rgb(56,68,84);
+}
