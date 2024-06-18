@@ -5,11 +5,30 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 
 function Sidebar({ authenticateFunction }) {
+  var currentPath = window.location.pathname;
   const navigate = useNavigate();
-  function handleLogoutButton() {}
-  function handleAboutButton() {
-    navigate("/about");
+  while (currentPath==="/"){
+    
   }
+  return (
+    <div className="sidebar">
+      <img className="logo" src={require("../images/vaccineLogo.png")} />
+      <button className="dashboardButton" onClick={handleHomeButton}>
+        Dashboard
+      </button>
+      <button className="vaccinationButton">Vaccination</button>
+      <button className="profileButton" onClick={handleProfileButton}>
+        Profile
+      </button>
+      <button className="medicalHistoryButton">Medical History</button>
+      <button className="logoutButton" onClick={handleLogoutButton}>
+        Logout
+      </button>
+    </div>
+  );
+
+  function handleLogoutButton() {}
+  function handleProfileButton() {}
   function handleHomeButton() {
     navigate("/");
   }
@@ -17,23 +36,8 @@ function Sidebar({ authenticateFunction }) {
     authenticateFunction(false);
     navigate("/");
   }
-  return (
-    <div className="sidebar">
-      <img
-        className="logo"
-        src={require('../images/vaccineLogo.png')}
-      />
-      <button className="homeButton" onClick={handleHomeButton}>
-        Dashboard
-      </button>
-      <button>Vaccination</button>
-      <button onClick={handleAboutButton}>Profile</button>
-      <button>Medical Data</button>
-      <button className="logoutButton" onClick={handleLogoutButton}>
-        Logout
-      </button>
-    </div>
-  );
+
+  
 }
 
 export default Sidebar;
