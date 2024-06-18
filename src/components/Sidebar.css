@@ -32,6 +32,9 @@
 .sidebar button:hover {
     background-color: rgb(56,60,76); 
 }
+.activeButton {
+    background-color: rgb(46, 49, 64) !important; 
+}
 .logoutButton{
     position: fixed;
     margin-top: 75vh;
