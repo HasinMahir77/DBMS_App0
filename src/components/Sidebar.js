@@ -16,19 +16,25 @@ function Sidebar({ authenticateFunction }) {
  
   function handleVaccinationButton() {
     setActiveButton("vaccinationButton");
-    navigate("/");
+    navigate("/vaccination");
   }
   function handleProfileButton() {
     setActiveButton("profileButton");
+    navigate("/profile");
 
   }
   function handleMedicalDataButton(){
     setActiveButton("medicalDataButton");
+    navigate("/medicalData");
 
   }
    function handleLogoutButton() {
      authenticateFunction(false);
      navigate("/");
+   }
+   function handleCertificatesButton() {
+     setActiveButton("certificatesButton");
+     navigate("/certificates")
    }
 
   return (
@@ -73,6 +79,16 @@ function Sidebar({ authenticateFunction }) {
         onClick={handleMedicalDataButton}
       >
         Medical Data
+      </button>
+      <button
+        onClick={handleCertificatesButton}
+        className={
+          activeButton === "certificatesButton"
+            ? "activeButton certificatesButton"
+            : "certificatesButton"
+        }
+      >
+        Certificates
       </button>
       <button className="logoutButton" onClick={handleLogoutButton}>
         Logout

@@ -1,0 +1,124 @@
+.dashboard{
+    position: fixed;
+    left: 15vw;
+    width: 82vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 2vw;
+}
+.dashboardTiles{
+    width: 82vw;
+    height: 20vh;
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+}
+.dashboardTiles div {
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+    border-radius: 10px;
+    width: 15vw;
+    font-size: xx-large;
+    font-weight: bold;
+}
+.dashboardTiles div div {
+    color: green;
+    font-weight: 600;
+    font-size: x-large;
+    position: relative;
+    top: 9vh;
+}
+
+.mainContent {
+    margin-top: 8vh;
+    display: flex;
+    flex-direction: row;
+    gap: 3vw;
+}
+.offeredVaccineList{
+    font-size: 2.4vmin;
+    font-weight: 500;
+    width: 15vw;
+    margin-top: 2vh;
+    justify-content: center;
+}
+.campaignInfo span{
+    font-size: larger;
+    font-weight: 500;
+}
+.overviewTitle{
+    position: relative;
+    top: 0px;
+    font-size: 3vmin;
+    background-color: lightgray;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+.elderlyOverview{
+    justify-content: center;
+    border: 1px solid lightgray;
+    width: 30vw;
+    height: 30vh;
+    border-radius: 15px;
+    gap: 2vw;
+}
+.elderlyOverview span{
+    font-size: 2.7vmin;
+    font-weight: 400;
+}
+
+.appointmentInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vh;
+    margin-left: 3vw;
+}
+
+.elderlyInfo{
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+}
+.personalInfo{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    margin-left: 1vw;
+    margin-top: 1vh;
+    gap: 1vh;
+}
+.campaignInfo{
+    width: 45vw;
+    border: 1px solid lightgray;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 55vh;
+   
+}
+.campaignInfoTitle{
+    position: relative;
+    top: 0px;
+    font-size: 3vmin;
+    background-color: lightgray;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+.pieChart{
+    width: 20vw !important;
+    height: 20vw !important;
+
+}
+.campaignInfoContent{
+    display: flex;
+    flex-direction: row;
+    gap: 4vw;
+    margin-left: 2vw;
+    margin-top: 2vh;
+
+}

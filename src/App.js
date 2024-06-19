@@ -21,6 +21,27 @@ import Footer
 import "./App.css";
 
 function App() {
+  var Rafid = {
+    fname: "Rafid",
+    lname: "Alam",
+    dob: 13,
+    mob: 3,
+    yob: 1940,
+    address: "191, Block D, Bashundhara R/A, Dhaka",
+    receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
+    recommendedVaccines: ["Flu", "Tetanus"],
+  };
+  var Hasib = {
+    fname: "Hasib",
+    lname: "Islam",
+    dob: 13,
+    mob: 3,
+    yob: 2002,
+    address: "191, Block D, Bashundhara R/A, Dhaka",
+    receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
+    recommendedVaccines: ["Flu", "Tetanus"],
+  };
+  
   useEffect(() => {
     document.title = "Vaccination";
   }, []);
@@ -49,7 +70,7 @@ function App() {
               <Route
                 path="/"
                 element={
-                  isAuthenticated ? <DashboardPage /> : <Navigate to="/login" />
+                  isAuthenticated ? <DashboardPage elderly={Rafid} caretaker={Hasib} /> : <Navigate to="/login" />
                 }
               />
               <Route
