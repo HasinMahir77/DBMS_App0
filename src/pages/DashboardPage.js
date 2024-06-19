@@ -76,7 +76,7 @@ export default function DsahboardPage({elderly, caretaker}) {
           <div className="campaignInfoTitle">Campaign Information</div>
           <div className="campaignInfoContent">
             <ListGroup className="offeredVaccineList">
-              Vaccines Offered
+              Vaccines Offered!
               <ListGroup.Item>Covid-19</ListGroup.Item>
               <ListGroup.Item>Measles</ListGroup.Item>
               <ListGroup.Item>Cholera</ListGroup.Item>
