@@ -10,8 +10,7 @@ import {
 } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import DashboardPage from "./pages/DashboardPage";
-import ContactPage from "./pages/ContactPage";
-import AboutPage from "./pages/AboutPage";
+import VaccinationPage from "./pages/VaccinationPage";
 import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
 import Sidebar from "./components/Sidebar";
@@ -28,7 +27,7 @@ function App() {
     mob: 3,
     yob: 1940,
     address: "191, Block D, Bashundhara R/A, Dhaka",
-    receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
+    receivedVaccines: ["MMR", "Flu", "Covid-19"],
     recommendedVaccines: ["Flu", "Tetanus"],
   };
   var Hasib = {
@@ -41,6 +40,7 @@ function App() {
     receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
     recommendedVaccines: ["Flu", "Tetanus"],
   };
+  var availableVaccines = ["Covid-19","Flu", "Cholera", "Tetanus"];
   
   useEffect(() => {
     document.title = "Vaccination";
@@ -74,17 +74,12 @@ function App() {
                 }
               />
               <Route
-                path="/about"
+                path="/vaccination"
                 element={
-                  isAuthenticated ? <AboutPage /> : <Navigate to="/login" />
+                  isAuthenticated ? <VaccinationPage elderly={Rafid} caretaker={Hasib} availableVaccines={availableVaccines} /> : <Navigate to="/login" />
                 }
               />
-              <Route
-                path="/contact"
-                element={
-                  isAuthenticated ? <ContactPage /> : <Navigate to="/login" />
-                }
-              />
+              
               <Route
                 path="*"
                 element={
