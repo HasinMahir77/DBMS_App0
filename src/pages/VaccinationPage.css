@@ -1,0 +1,10 @@
+.vaccinationPage{
+    position: fixed;
+    left: 15vw;
+    width: 82vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 2vw;
+}

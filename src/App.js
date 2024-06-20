@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import DashboardPage from "./pages/DashboardPage";
-import ContactPage from "./pages/ContactPage";
+import VaccinationPage from "./pages/VaccinationPage";
 import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
@@ -74,15 +74,9 @@ function App() {
                 }
               />
               <Route
-                path="/about"
+                path="/vaccination"
                 element={
-                  isAuthenticated ? <AboutPage /> : <Navigate to="/login" />
-                }
-              />
-              <Route
-                path="/contact"
-                element={
-                  isAuthenticated ? <ContactPage /> : <Navigate to="/login" />
+                  isAuthenticated ? <VaccinationPage /> : <Navigate to="/login" />
                 }
               />
               <Route
