@@ -41,6 +41,7 @@ function App() {
     receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
     recommendedVaccines: ["Flu", "Tetanus"],
   };
+  var availableVaccines = ["Flu","Tetanus","Covid-19","Measles","Cholera"];
   
   useEffect(() => {
     document.title = "Vaccination";
@@ -76,7 +77,7 @@ function App() {
               <Route
                 path="/vaccination"
                 element={
-                  isAuthenticated ? <VaccinationPage /> : <Navigate to="/login" />
+                  isAuthenticated ? <VaccinationPage elderly={Rafid} caretaker={Hasib} availableVaccines={availableVaccines} /> : <Navigate to="/login" />
                 }
               />
               <Route

@@ -1,10 +1,72 @@
 .vaccinationPage{
     position: fixed;
+    top: 0px;
     left: 15vw;
     width: 82vw;
-    height: 90vh;
+    height: 86vh;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    gap: 5vw;
+    margin-bottom: 2vh;
+    margin-top: 10vh;
     margin-left: 2vw;
 }
+
+.appointmentCol{
+    height: 70vh;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 15px;
+}
+.vaccinationHistoryCol{
+    height: 70vh;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 15px;
+}
+
+.appointmentTitle{
+    position: relative;
+    top: 0px;
+    font-size: 3vmin;
+    background-color: lightgray;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    height: 5vh !important;
+    width: 40vw;
+    
+}
+.vaccinationHistoryTitle{
+    position: relative;
+    top: 0px;
+    font-size: 3vmin;
+    background-color: lightgray;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    height: 5vh !important;
+    width: 30vw;
+    
+}
+.scheduleButton{
+    width: 8vw;
+    height: 5vh;
+    
+}
+.availableVaccines{
+    font-size: 2vmin;
+    font-weight: 500;
+    margin-top: auto;
+   
+}
+.pleaseSchedule{
+    font-size: 2.5vmin;
+}
+
