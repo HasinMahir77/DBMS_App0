@@ -1,7 +1,5 @@
 import React from "react";
 import { useId,useState } from "react";
-import { format, isValid, parse } from "date-fns";
-import { DayPicker } from "react-day-picker";
 import "./VaccinationPage.css";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -9,6 +7,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import Modal from "react-bootstrap/Modal";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
+import { format } from "date-fns";
 
 
 export default function VaccinationPage({elderly,caretaker,availableVaccines}){
@@ -17,39 +21,49 @@ export default function VaccinationPage({elderly,caretaker,availableVaccines}){
   for (let i = 0; i < availableVaccines.length; i += 3) {
     rows.push(availableVaccines.slice(i, i + 3));
   }
+ //Setting up the day picker
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const oneWeekLater = new Date();
+  oneWeekLater.setDate(oneWeekLater.getDate() + 7);
+  const disabledDays = { before: tomorrow, after: oneWeekLater };
+
+  //Setting up time slots
+  const [selectedSlot, setSelectedSlot] = useState(null); //Time slot
+  const handleSlotClick = (slot) => {
+    setSelectedSlot(slot);
+    console.log(slot);
+  };
+   const generateTimeSlots = () => {
+     const startTime = new Date();
+     startTime.setHours(10, 0, 0); // 10:00 AM
+     const endTime = new Date();
+     endTime.setHours(15, 0, 0); // 3:00 PM
+
+     const timeSlots = [];
+     const interval = 30; // 30 minutes interval
+     let currentTime = startTime;
+
+     while (currentTime <= endTime) {
+       timeSlots.push(
+         currentTime.toLocaleTimeString([], {
+           hour: "2-digit",
+           minute: "2-digit",
+         })
+       );
+       currentTime.setMinutes(currentTime.getMinutes() + interval);
+     }
+
+     return timeSlots;
+   };
+   const timeSlots = generateTimeSlots();
+
+
   //Appointment variables
-  const inputId = useId();
-  // Hold the month in state to control the calendar when the input changes
-  const [month, setMonth] = useState(new Date());
-  // Hold the selected date in state
-  const [selectedDate, setSelectedDate] = useState(null);
-
-  // Hold the input value in state
-  const [inputValue, setInputValue] = useState("");
   const [appointed, setAppointed] = useState(elderly.appointed);
-  const handleDayPickerSelect = (date) => {
-    if (!date) {
-      setInputValue("");
-      setSelectedDate(undefined);
-    } else {
-      setSelectedDate(date);
-      setMonth(date);
-      setInputValue(format(date, "MM/dd/yyyy"));
-    }
-  };
+  const [selected, setSelected] = useState(null);
+  const formattedDate = selected ? format(selected, "dd-MM-yyyy") : "None";
 
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value); // keep the input value in sync
-
-    const parsedDate = parse(e.target.value, "MM/dd/yyyy", new Date());
-
-    if (isValid(parsedDate)) {
-      setSelectedDate(parsedDate);
-      setMonth(parsedDate);
-    } else {
-      setSelectedDate(undefined);
-    }
-  };
   //Modal state
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -73,37 +87,41 @@ export default function VaccinationPage({elderly,caretaker,availableVaccines}){
         <Modal
           show={show}
           onHide={handleClose}
-          size="xl"
+          size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <Modal.Header closeButton>
+          <Modal.Header closeButton className="modalHeader">
             <Modal.Title>Schedule Appointment</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <label htmlFor={inputId}>
-              <strong>Date: </strong>
-            </label>
-            <input
-              style={{ fontSize: "inherit" }}
-              id={inputId}
-              type="text"
-              value={inputValue}
-              placeholder="MM/dd/yyyy"
-              onChange={handleInputChange}
-            />
-            <DayPicker
-              month={month}
-              onMonthChange={setMonth}
-              mode="single"
-              selected={selectedDate}
-              onSelect={handleDayPickerSelect}
-              footer={
-                <p aria-live="assertive" aria-atomic="true">
-                  Selected: {selectedDate?.toDateString()}
-                </p>
-              }
-            />
+          <Modal.Body className="modalBody">
+            <div className="datePickerDiv">
+              <h3 className="dateHeader">Select Date</h3>
+              <DayPicker
+                mode="single"
+                selected={selected}
+                onSelect={setSelected}
+                modifiers={{ disabled: disabledDays }}
+              />
+            </div>
+            <div className="timePickerDiv">
+              <h3 className="dateHeader">Select Time</h3>
+              <Container>
+                <Row className="time-slot-grid">
+                  {timeSlots.map((slot, index) => (
+                    <Col key={index} xs={12} md={4} className="mb-3">
+                      <Button
+                        variant={selectedSlot === slot ? "primary" : "light"}
+                        onClick={() => handleSlotClick(slot)}
+                        className="w-100"
+                      >
+                        {slot}
+                      </Button>
+                    </Col>
+                  ))}
+                </Row>
+              </Container>
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>

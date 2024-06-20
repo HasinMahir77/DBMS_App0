@@ -69,4 +69,35 @@
 .pleaseSchedule{
     font-size: 2.5vmin;
 }
+.modalBody{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1vw;
+}
+.datePickerDiv{
+    position: relative;
+    left: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ 
+}
+.timePickerDiv{
+    position: relative;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: center;
+    gap: 2vh;
 
+}
+.modalHeader{
+    background-color: rgb(56,68,84);
+    color: white;
+}
