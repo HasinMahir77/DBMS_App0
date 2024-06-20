@@ -30,6 +30,7 @@ function App() {
     address: "191, Block D, Bashundhara R/A, Dhaka",
     receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
     recommendedVaccines: ["Flu", "Tetanus"],
+    appointment: {appointed: false, date: null}
   };
   var Hasib = {
     fname: "Hasib",
