@@ -7,12 +7,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import Modal from "react-bootstrap/Modal";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import Select from "react-select";
 
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { format } from "date-fns";
+
+
 
 
 export default function VaccinationPage({elderly,caretaker,availableVaccines}){
@@ -29,10 +30,11 @@ export default function VaccinationPage({elderly,caretaker,availableVaccines}){
   const disabledDays = { before: tomorrow, after: oneWeekLater };
 
   //Setting up time slots
-  const [selectedSlot, setSelectedSlot] = useState(null); //Time slot
+  const [selectedSlot, setSelectedSlot] = useState(elderly.appointment.time); //Time slot
   const handleSlotClick = (slot) => {
     setSelectedSlot(slot);
-    console.log(slot);
+    elderly.appointment.time = slot;
+    console.log("Selected: "+slot);
   };
    const generateTimeSlots = () => {
      const startTime = new Date();
@@ -61,8 +63,18 @@ export default function VaccinationPage({elderly,caretaker,availableVaccines}){
 
   //Appointment variables
   const [appointed, setAppointed] = useState(elderly.appointed);
-  const [selected, setSelected] = useState(null);
-  const formattedDate = selected ? format(selected, "dd-MM-yyyy") : "None";
+  const [selectedDate, setSelectedDate] = useState(elderly.appointment.date);
+  const [selectedCenter, setSelectedCenter] = useState(null);
+  const formattedDate = selectedDate ? format(selectedDate, "dd-MM-yyyy") : "None";
+
+  const centers = [
+    { value: "center1", label: "Vaccination Center 1" },
+    { value: "center2", label: "Vaccination Center 2" },
+    { value: "center3", label: "Vaccination Center 3" },
+  ];
+  function handleDropdown(center){
+    setSelectedCenter(center);
+  };
 
   //Modal state
   const [show, setShow] = useState(false);
@@ -72,17 +84,26 @@ export default function VaccinationPage({elderly,caretaker,availableVaccines}){
     <div className="vaccinationPage">
       <div className="appointmentCol">
         <div className="appointmentTitle">Appointment</div>
-        <p className="pleaseSchedule">
-          Please schedule an appointment at your desired vaccination centre.{" "}
-        </p>
-
-        <Button
-          variant="primary"
-          className="scheduleButton"
-          onClick={handleShow}
-        >
-          {appointed ? "Reschedule" : "Schedule"}
-        </Button>
+        {!appointed && (
+          <p className="pleaseSchedule">
+            Please schedule an appointment at your desired vaccination center.
+          </p>
+        )}
+        <div className="appointmentInfo"></div>
+        <div className="appointmentButtonDiv">
+          <Button
+            variant="primary"
+            className="scheduleButton"
+            onClick={handleShow}
+          >
+            {appointed ? "Reschedule" : "Schedule"}
+          </Button>
+          {appointed && (
+            <Button className="cancelScheduleButton" variant="danger">
+              Cancel
+            </Button>
+          )}
+        </div>
         {/* Modal*/}
         <Modal
           show={show}
@@ -96,16 +117,16 @@ export default function VaccinationPage({elderly,caretaker,availableVaccines}){
           </Modal.Header>
           <Modal.Body className="modalBody">
             <div className="datePickerDiv">
-              <h3 className="dateHeader">Select Date</h3>
+              <h4 className="dateHeader">Date</h4>
               <DayPicker
                 mode="single"
-                selected={selected}
-                onSelect={setSelected}
+                selected={selectedDate}
+                onSelect={setSelectedDate}
                 modifiers={{ disabled: disabledDays }}
               />
             </div>
             <div className="timePickerDiv">
-              <h3 className="dateHeader">Select Time</h3>
+              <h4 className="dateHeader">Time</h4>
               <Container>
                 <Row className="time-slot-grid">
                   {timeSlots.map((slot, index) => (
@@ -121,6 +142,14 @@ export default function VaccinationPage({elderly,caretaker,availableVaccines}){
                   ))}
                 </Row>
               </Container>
+              <h4 className="dateHeader">Vaccination Center</h4>
+              <Select
+                value={selectedCenter}
+                onChange={handleDropdown}
+                options={centers}
+                placeholder="Select an option"
+                isClearable
+              />
             </div>
           </Modal.Body>
           <Modal.Footer>
@@ -149,12 +178,13 @@ export default function VaccinationPage({elderly,caretaker,availableVaccines}){
       <div className="vaccinationHistoryCol">
         <div className="vaccinationHistoryTitle">
           History
-          <Table striped bordered hover size="sm">
+          <Table bordered size="sm" className="historyTable">
             <thead>
               <tr>
                 <th>#</th>
                 <th>Vaccine</th>
                 <th>Date</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -162,11 +192,13 @@ export default function VaccinationPage({elderly,caretaker,availableVaccines}){
                 <td>1</td>
                 <td>Covid-19</td>
                 <td>22 Jul, 2021</td>
+                <td>3/3</td>
               </tr>
               <tr>
                 <td>2</td>
                 <td>Flu</td>
                 <td>5 May, 2022</td>
+                <td>1/1</td>
               </tr>
             </tbody>
           </Table>

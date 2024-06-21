@@ -37,7 +37,8 @@
     position: relative;
     top: 0px;
     font-size: 3vmin;
-    background-color: lightgray;
+    background-color: rgba(65, 79, 98, 0.90);
+    color: white;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     height: 5vh !important;
@@ -48,17 +49,30 @@
     position: relative;
     top: 0px;
     font-size: 3vmin;
-    background-color: lightgray;
+    background-color: rgba(65, 79, 98, 0.90);
+    color: white;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     height: 5vh !important;
     width: 30vw;
     
 }
+.appointmentButtonDiv{
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+}
 .scheduleButton{
     width: 8vw;
     height: 5vh;
-    
+    position: relative;
+    font-size: 2vmin !important;
+}
+.cancelScheduleButton{
+    width: 8vw;
+    height: 5vh;
+    position: relative;
+    font-size: 2vmin !important;
 }
 .availableVaccines{
     font-size: 2vmin;

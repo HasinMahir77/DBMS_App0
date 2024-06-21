@@ -11,7 +11,6 @@ import {
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import DashboardPage from "./pages/DashboardPage";
 import VaccinationPage from "./pages/VaccinationPage";
-import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
 import Sidebar from "./components/Sidebar";
@@ -30,7 +29,7 @@ function App() {
     address: "191, Block D, Bashundhara R/A, Dhaka",
     receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
     recommendedVaccines: ["Flu", "Tetanus"],
-    appointment: {appointed: false, date: null}
+    appointment: {appointed: false,center: null, date: null, time:null}
   };
   var Hasib = {
     fname: "Hasib",

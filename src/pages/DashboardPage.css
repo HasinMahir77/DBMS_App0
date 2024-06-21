@@ -54,7 +54,8 @@
     position: relative;
     top: 0px;
     font-size: 3vmin;
-    background-color: lightgray;
+    background-color: rgba(65, 79, 98, 0.90);
+    color: white;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
 }
@@ -105,7 +106,8 @@
     position: relative;
     top: 0px;
     font-size: 3vmin;
-    background-color: lightgray;
+    background-color: rgba(65, 79, 98, 0.90);
+    color: white;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
 }
