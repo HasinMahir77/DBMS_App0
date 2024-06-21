@@ -21,6 +21,7 @@
     align-items: center;
     border: 1px solid lightgray;
     border-radius: 15px;
+    gap: 5vh;
 }
 .vaccinationHistoryCol{
     height: 70vh;

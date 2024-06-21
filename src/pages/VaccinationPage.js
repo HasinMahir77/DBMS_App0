@@ -67,6 +67,29 @@ export default function VaccinationPage({elderly,caretaker,availableVaccines}){
   const [selectedCenter, setSelectedCenter] = useState(null);
   const formattedDate = selectedDate ? format(selectedDate, "dd-MM-yyyy") : "None";
 
+  function submitAppointment(){
+    selectedDate && selectedCenter && selectedSlot? setAppointed(true) : alert("Please fill in all details"); 
+
+    elderly.appointed = appointed;
+    elderly.selectedDate = selectedDate;
+    elderly.selectedCenter = selectedCenter;
+    elderly.selectedSlot = selectedSlot;
+
+    setShow(false);
+  }
+  function cancelAppointment(){
+    setSelectedDate(null);
+    setSelectedSlot(null);
+    setSelectedCenter(null);
+    setAppointed(false);
+
+    elderly.appointed = false;
+    elderly.selectedDate = null;
+    elderly.selectedCenter = null;
+    elderly.selectedSlot = null;
+
+  }
+
   const centers = [
     { value: "center1", label: "Vaccination Center 1" },
     { value: "center2", label: "Vaccination Center 2" },
@@ -84,11 +107,19 @@ export default function VaccinationPage({elderly,caretaker,availableVaccines}){
     <div className="vaccinationPage">
       <div className="appointmentCol">
         <div className="appointmentTitle">Appointment</div>
-        {!appointed && (
-          <p className="pleaseSchedule">
-            Please schedule an appointment at your desired vaccination center.
-          </p>
-        )}
+
+        <p className="pleaseSchedule">
+          {appointed
+            ? "Appointment confimed at " +
+              formattedDate +
+              " " +
+              selectedSlot +
+              " in" +
+              " " +
+              selectedCenter.label
+            : "Please schedule an appointment at your desired vaccination center."}
+        </p>
+
         <div className="appointmentInfo"></div>
         <div className="appointmentButtonDiv">
           <Button
@@ -99,7 +130,11 @@ export default function VaccinationPage({elderly,caretaker,availableVaccines}){
             {appointed ? "Reschedule" : "Schedule"}
           </Button>
           {appointed && (
-            <Button className="cancelScheduleButton" variant="danger">
+            <Button
+              className="cancelScheduleButton"
+              variant="danger"
+              onClick={cancelAppointment}
+            >
               Cancel
             </Button>
           )}
@@ -156,8 +191,8 @@ export default function VaccinationPage({elderly,caretaker,availableVaccines}){
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={handleClose}>
-              {appointed ? "Reschedule" : "Schedule"}
+            <Button variant="primary" onClick={submitAppointment}>
+              Confirm
             </Button>
           </Modal.Footer>
         </Modal>
