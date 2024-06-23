@@ -1,72 +1,107 @@
 import React, { useState } from "react";
-import { Form, Button, Table } from "react-bootstrap";
+import { Table, Button, Form, Row, Col } from "react-bootstrap";
 import "./MedicalDataPage.css";
 
 const MedicalDataPage = () => {
-  const [documents, setDocuments] = useState([]);
-  const [name, setName] = useState("");
-  const [date, setDate] = useState("");
+  const [medicalData, setMedicalData] = useState([]);
+  const [diseaseName, setDiseaseName] = useState("");
+  const [documentDate, setDocumentDate] = useState("");
   const [file, setFile] = useState(null);
 
-  const handleUpload = (e) => {
-    e.preventDefault();
-    if (name && date && file) {
-      const newDocument = { name, date, file };
-      setDocuments([...documents, newDocument]);
-      setName("");
-      setDate("");
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (file && diseaseName && documentDate) {
+      const newMedicalData = [
+        ...medicalData,
+        {
+          name: diseaseName,
+          date: documentDate,
+          fileName: file.name,
+        },
+      ];
+      setMedicalData(newMedicalData);
+      setDiseaseName("");
+      setDocumentDate("");
       setFile(null);
     }
   };
 
+  const handleDelete = (index) => {
+    const newMedicalData = medicalData.filter((_, i) => i !== index);
+    setMedicalData(newMedicalData);
+  };
+
   return (
-    <div className="medical-data-page container">
+    <div className="container medical-data-page">
       <h2 className="text-center my-4">Medical Data</h2>
-      <Form onSubmit={handleUpload} className="mb-4">
-        <Form.Group controlId="formName">
-          <Form.Label>Disease Name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter disease name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formDate" className="mt-3">
-          <Form.Label>Date</Form.Label>
-          <Form.Control
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formFile" className="mt-3">
-          <Form.Label>Medical Document</Form.Label>
-          <Form.Control
-            type="file"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-        </Form.Group>
-
-        <Button variant="primary" type="submit" className="mt-3">
-          Upload
-        </Button>
+      <Form onSubmit={handleSubmit} className="text-center mb-4">
+        <Row className="justify-content-center">
+          <Col md={3}>
+            <Form.Group controlId="formDiseaseName">
+              <Form.Label>Disease Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={diseaseName}
+                onChange={(e) => setDiseaseName(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </Col>
+          <Col md={3}>
+            <Form.Group controlId="formDocumentDate">
+              <Form.Label>Document Date</Form.Label>
+              <Form.Control
+                type="date"
+                value={documentDate}
+                onChange={(e) => setDocumentDate(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </Col>
+          <Col md={3}>
+            <Form.Group controlId="formFile">
+              <Form.Label>Upload File</Form.Label>
+              <Form.Control type="file" onChange={handleFileChange} required />
+            </Form.Group>
+          </Col>
+          <Col md={2} className="align-self-end">
+            <Button type="submit" className="w-100">
+              Upload
+            </Button>
+          </Col>
+        </Row>
       </Form>
-
-      <Table striped bordered hover>
+      <Table striped bordered hover className="text-center">
         <thead>
           <tr>
             <th>Disease Name</th>
-            <th>Date</th>
+            <th>Document Date</th>
+            <th>File Name</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {documents.map((doc, index) => (
+          {medicalData.map((data, index) => (
             <tr key={index}>
-              <td>{doc.name}</td>
-              <td>{doc.date}</td>
+              <td>{data.name}</td>
+              <td>{data.date}</td>
+              <td>{data.fileName}</td>
+              <td>
+                <Button
+                  variant="primary"
+                  className="me-2"
+                  onClick={() => alert(`Download ${data.fileName}`)}
+                >
+                  Download
+                </Button>
+                <Button variant="danger" onClick={() => handleDelete(index)}>
+                  Delete
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>
