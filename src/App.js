@@ -115,11 +115,7 @@ function App() {
               <Route
                 path="/login"
                 element={
-                  isAuthenticated ? (
-                    <DashboardPage />
-                  ) : (
-                    <LoginPage onLogin={handleLoginComplete} />
-                  )
+                  DashboardPage
                 }
               />
             </Routes>
