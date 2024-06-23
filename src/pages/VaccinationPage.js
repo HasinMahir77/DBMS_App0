@@ -197,7 +197,7 @@ export default function VaccinationPage({elderly,caretaker,availableVaccines}){
           </Modal.Footer>
         </Modal>
         <Container className="availableVaccines">
-          Available Vaccines
+          Recommended Vaccines
           {rows.map((row, rowIndex) => (
             <Row key={rowIndex} className="mb-3">
               {row.map((item, colIndex) => (
