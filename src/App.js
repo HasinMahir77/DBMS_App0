@@ -6,9 +6,11 @@ import {
   Navigate,
   useLocation,
   useNavigate,
+  Link,
 } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import DashboardPage from "./pages/DashboardPage";
+import ContactPage from "./pages/ContactPage";
 import VaccinationPage from "./pages/VaccinationPage";
 import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
@@ -18,19 +20,20 @@ import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
-  const [Rafid, setRafid] = useState({
+  var Rafid = {
     fname: "Rafid",
     lname: "Alam",
     dob: 13,
-    mob: 3,
-    yob: 1940,
+
+
     address: "191, Block D, Bashundhara R/A, Dhaka",
     receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
     recommendedVaccines: ["Flu", "Tetanus"],
     appointment: { appointed: false, center: null, date: null, time: null },
-  });
+  };
+  
 
-  const [Hasib, setHasib] = useState({
+  var Hasib = {
     fname: "Hasib",
     lname: "Islam",
     dob: 13,
@@ -39,9 +42,8 @@ function App() {
     address: "191, Block D, Bashundhara R/A, Dhaka",
     receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
     recommendedVaccines: ["Flu", "Tetanus"],
-  });
-
-  const [availableVaccines, setAvailableVaccines] = useState([
+  };
+   const [availableVaccines, setAvailableVaccines] = useState([
     "Flu",
     "Tetanus",
     "Covid-19",
@@ -53,7 +55,7 @@ function App() {
     document.title = "Vaccination";
   }, []);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -78,14 +80,9 @@ function App() {
                 path="/"
                 element={
                   isAuthenticated ? (
-                    <DashboardPage
-                      elderly={Rafid}
-                      caretaker={Hasib}
-                      setElderly={setRafid}
-                      setCaretaker={setHasib}
-                    />
+                    <DashboardPage elderly={Rafid} caretaker={Hasib} />
                   ) : (
-                    <Navigate to="" />
+                    <Navigate to="/login" />
                   )
                 }
               />
@@ -97,13 +94,16 @@ function App() {
                       elderly={Rafid}
                       caretaker={Hasib}
                       availableVaccines={availableVaccines}
-                      setElderly={setRafid}
-                      setCaretaker={setHasib}
-                      setAvailableVaccines={setAvailableVaccines}
                     />
                   ) : (
                     <Navigate to="/login" />
                   )
+                }
+              />
+              <Route
+                path="/contact"
+                element={
+                  isAuthenticated ? <ContactPage /> : <Navigate to="/login" />
                 }
               />
               <Route
@@ -126,7 +126,7 @@ function App() {
           </CSSTransition>
         </TransitionGroup>
       </div>
-      <Footer />
+      <Footer></Footer>
     </div>
   );
 }
