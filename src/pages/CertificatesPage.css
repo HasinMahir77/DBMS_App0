@@ -1,0 +1,24 @@
+.certificates-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+  bottom: 28vh;
+  left: 5vw
+
+}
+
+.certificates-page .table {
+  margin-top: 20px;
+  width: 90%; /* Adjusted width to cover more area */
+  max-width: 1200px; /* Set a maximum width for responsiveness */
+  font-size: 18px; /* Larger font size */
+}
+
+.certificates-page .table th,
+.certificates-page .table td {
+  vertical-align: middle; /* Center content vertically */
+  padding: 12px; /* Increase padding for better spacing */
+}

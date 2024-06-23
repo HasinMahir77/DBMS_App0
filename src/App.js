@@ -15,7 +15,8 @@ import VaccinationPage from "./pages/VaccinationPage";
 import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
-import MedicalDataPage from "./pages/MedicalDataPage"; // Import MedicalDataPage
+import MedicalDataPage from "./pages/MedicalDataPage";
+import CertificatesPage from "./pages/CertificatesPage";
 import Sidebar from "./components/Sidebar";
 import SidebarRight from "./components/SidebarRight";
 import Footer from "./components/Footer";
@@ -52,6 +53,21 @@ function App() {
     "Covid-19",
     "Measles",
     "Cholera",
+  ]);
+
+  const [certificates, setCertificates] = useState([
+    {
+      name: "Covid-19",
+      numberOfDoses: 2,
+      dosesCompleted: 2,
+      dateOfLastDose: "2021-05-12",
+    },
+    {
+      name: "Flu",
+      numberOfDoses: 1,
+      dosesCompleted: 1,
+      dateOfLastDose: "2022-10-25",
+    },
   ]);
 
   useEffect(() => {
@@ -120,9 +136,23 @@ function App() {
                 }
               />
               <Route
-                path="/medicalData"
+                path="/medical-data"
                 element={
-                  isAuthenticated ? <MedicalDataPage /> : <Navigate to="/login" />
+                  isAuthenticated ? (
+                    <MedicalDataPage />
+                  ) : (
+                    <Navigate to="/login" />
+                  )
+                }
+              />
+              <Route
+                path="/certificates"
+                element={
+                  isAuthenticated ? (
+                    <CertificatesPage certificates={certificates} />
+                  ) : (
+                    <Navigate to="/login" />
+                  )
                 }
               />
               <Route
