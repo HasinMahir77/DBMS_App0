@@ -14,6 +14,7 @@ import ContactPage from "./pages/ContactPage";
 import VaccinationPage from "./pages/VaccinationPage";
 import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
+import ProfilePage from "./pages/ProfilePage";
 import Sidebar from "./components/Sidebar";
 import SidebarRight from "./components/SidebarRight";
 import Footer from "./components/Footer";
@@ -24,6 +25,7 @@ function App() {
     fname: "Rafid",
     lname: "Alam",
     dob: 13,
+    nid: 123124515,
 
 
     address: "191, Block D, Bashundhara R/A, Dhaka",
@@ -39,6 +41,7 @@ function App() {
     dob: 13,
     mob: 3,
     yob: 2002,
+    age: 65,
     address: "191, Block D, Bashundhara R/A, Dhaka",
     receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
     recommendedVaccines: ["Flu", "Tetanus"],
@@ -50,6 +53,7 @@ function App() {
     "Measles",
     "Cholera",
   ]);
+  var [elderly,setElderly] = useState(Hasib);
 
   useEffect(() => {
     document.title = "Vaccination";
@@ -80,7 +84,7 @@ function App() {
                 path="/"
                 element={
                   isAuthenticated ? (
-                    <DashboardPage elderly={Rafid} caretaker={Hasib} />
+                    <DashboardPage elderly={elderly} caretaker={Hasib} />
                   ) : (
                     <Navigate to="/login" />
                   )
@@ -101,9 +105,9 @@ function App() {
                 }
               />
               <Route
-                path="/contact"
+                path="/profile"
                 element={
-                  isAuthenticated ? <ContactPage /> : <Navigate to="/login" />
+                  isAuthenticated ? <ProfilePage elderly={Rafid} setElderly={setElderly}  /> : <Navigate to="/login" />
                 }
               />
               <Route
