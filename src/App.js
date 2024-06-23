@@ -15,45 +15,44 @@ import VaccinationPage from "./pages/VaccinationPage";
 import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
+import MedicalDataPage from "./pages/MedicalDataPage"; // Import MedicalDataPage
 import Sidebar from "./components/Sidebar";
 import SidebarRight from "./components/SidebarRight";
 import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
-  var Rafid = {
+  const [Rafid, setRafid] = useState({
     fname: "Rafid",
     lname: "Alam",
     dob: 13,
+    mob: 3,
+    yob: 1940,
     nid: 123124515,
-
-
     address: "191, Block D, Bashundhara R/A, Dhaka",
     receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
     recommendedVaccines: ["Flu", "Tetanus"],
     appointment: { appointed: false, center: null, date: null, time: null },
-  };
-  
+  });
 
-  var Hasib = {
+  const [Hasib, setHasib] = useState({
     fname: "Hasib",
     lname: "Islam",
     dob: 13,
     mob: 3,
     yob: 2002,
-    age: 65,
     address: "191, Block D, Bashundhara R/A, Dhaka",
     receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
     recommendedVaccines: ["Flu", "Tetanus"],
-  };
-   const [availableVaccines, setAvailableVaccines] = useState([
+  });
+
+  const [availableVaccines, setAvailableVaccines] = useState([
     "Flu",
     "Tetanus",
     "Covid-19",
     "Measles",
     "Cholera",
   ]);
-  var [elderly,setElderly] = useState(Hasib);
 
   useEffect(() => {
     document.title = "Vaccination";
@@ -84,7 +83,7 @@ function App() {
                 path="/"
                 element={
                   isAuthenticated ? (
-                    <DashboardPage elderly={elderly} caretaker={Hasib} />
+                    <DashboardPage elderly={Rafid} caretaker={Hasib} />
                   ) : (
                     <Navigate to="/login" />
                   )
@@ -105,9 +104,25 @@ function App() {
                 }
               />
               <Route
+                path="/contact"
+                element={
+                  isAuthenticated ? <ContactPage /> : <Navigate to="/login" />
+                }
+              />
+              <Route
                 path="/profile"
                 element={
-                  isAuthenticated ? <ProfilePage elderly={Rafid} setElderly={setElderly}  /> : <Navigate to="/login" />
+                  isAuthenticated ? (
+                    <ProfilePage elderly={Rafid} setElderly={setRafid} />
+                  ) : (
+                    <Navigate to="/login" />
+                  )
+                }
+              />
+              <Route
+                path="/medicalData"
+                element={
+                  isAuthenticated ? <MedicalDataPage /> : <Navigate to="/login" />
                 }
               />
               <Route
@@ -119,14 +134,18 @@ function App() {
               <Route
                 path="/login"
                 element={
-                  DashboardPage
+                  isAuthenticated ? (
+                    <DashboardPage elderly={Rafid} caretaker={Hasib} />
+                  ) : (
+                    <LoginPage onLogin={handleLoginComplete} />
+                  )
                 }
               />
             </Routes>
           </CSSTransition>
         </TransitionGroup>
       </div>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 }

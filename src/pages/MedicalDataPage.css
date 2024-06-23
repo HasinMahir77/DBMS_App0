@@ -1,0 +1,26 @@
+.medical-data-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+  bottom: 10vh;
+  left: 10vh;
+
+}
+
+.medical-data-page .form-control {
+  max-width: 100%;
+}
+
+.medical-data-page .btn {
+  display: block;
+  width: 100%;
+}
+
+.medical-data-page table {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 800px;
+}
