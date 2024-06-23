@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useEffect } from "react-router-dom";
 import { useState } from "react";
 import "./Sidebar.css"; // Import the CSS file for the sidebar
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -8,6 +8,9 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 function Sidebar({ authenticateFunction }) {
   const [activeButton,setActiveButton] = useState("dashboardButton");
   const navigate = useNavigate();
+  const location = useLocation().pathname;
+
+  
 
   function handleDashboardButton() {
     navigate("/");

@@ -1,0 +1,118 @@
+.vaccinationPage{
+    position: fixed;
+    top: 0px;
+    left: 15vw;
+    width: 82vw;
+    height: 86vh;
+    display: flex;
+    flex-direction: row;
+    gap: 5vw;
+    margin-bottom: 2vh;
+    margin-top: 10vh;
+    margin-left: 2vw;
+}
+
+.appointmentCol{
+    height: 70vh;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 15px;
+    gap: 5vh;
+}
+.vaccinationHistoryCol{
+    height: 70vh;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 15px;
+}
+
+.appointmentTitle{
+    position: relative;
+    top: 0px;
+    font-size: 3vmin;
+    background-color: rgba(65, 79, 98, 0.90);
+    color: white;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    height: 5vh !important;
+    width: 40vw;
+    
+}
+.vaccinationHistoryTitle{
+    position: relative;
+    top: 0px;
+    font-size: 3vmin;
+    background-color: rgba(65, 79, 98, 0.90);
+    color: white;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    height: 5vh !important;
+    width: 30vw;
+    
+}
+.appointmentButtonDiv{
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+}
+.scheduleButton{
+    width: 8vw;
+    height: 5vh;
+    position: relative;
+    font-size: 2vmin !important;
+}
+.cancelScheduleButton{
+    width: 8vw;
+    height: 5vh;
+    position: relative;
+    font-size: 2vmin !important;
+}
+.availableVaccines{
+    font-size: 2vmin;
+    font-weight: 500;
+    margin-top: auto;
+   
+}
+.pleaseSchedule{
+    font-size: 2.5vmin;
+}
+.modalBody{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1vw;
+}
+.datePickerDiv{
+    position: relative;
+    left: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ 
+}
+.timePickerDiv{
+    position: relative;
+    right: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: center;
+    gap: 2vh;
+
+}
+.modalHeader{
+    background-color: rgb(56,68,84);
+    color: white;
+}

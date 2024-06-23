@@ -60,13 +60,24 @@ export default function DsahboardPage({elderly, caretaker}) {
           <div className="overviewTitle">Overview</div>
           <div className="elderlyInfo">
             <div className="personalInfo">
-              <span>Name: {elderly.fname + " " + elderly.lname}</span>
               <span>
-                DOB: {elderly.dob + "." + elderly.mob + "." + elderly.yob}
+                Name:{" "}
+                {elderly.fname ? elderly.fname + " " + elderly.lname : "N/A"}
               </span>
-              <span>Caretaker: {caretaker.fname + " " + caretaker.lname}</span>
+              <span>
+                DOB:{" "}
+                {elderly.dob
+                  ? `${elderly.dob}.${elderly.mob}.${elderly.yob}`
+                  : "N/A"}
+              </span>
+              <span>
+                Caretaker:{" "}
+                {caretaker.fname
+                  ? caretaker.fname + " " + caretaker.lname
+                  : "N/A"}
+              </span>
             </div>
-            <div className='appointmentInfo'>
+            <div className="appointmentInfo">
               <span>Appointments</span>
               <span>NONE</span>
             </div>

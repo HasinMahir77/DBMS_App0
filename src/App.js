@@ -6,22 +6,19 @@ import {
   Navigate,
   useLocation,
   useNavigate,
-  Link
 } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import DashboardPage from "./pages/DashboardPage";
-import ContactPage from "./pages/ContactPage";
-import AboutPage from "./pages/AboutPage";
+import VaccinationPage from "./pages/VaccinationPage";
 import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
 import Sidebar from "./components/Sidebar";
 import SidebarRight from "./components/SidebarRight";
-import Footer
- from "./components/Footer";
+import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
-  var Rafid = {
+  const [Rafid, setRafid] = useState({
     fname: "Rafid",
     lname: "Alam",
     dob: 13,
@@ -30,8 +27,10 @@ function App() {
     address: "191, Block D, Bashundhara R/A, Dhaka",
     receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
     recommendedVaccines: ["Flu", "Tetanus"],
-  };
-  var Hasib = {
+    appointment: { appointed: false, center: null, date: null, time: null },
+  });
+
+  const [Hasib, setHasib] = useState({
     fname: "Hasib",
     lname: "Islam",
     dob: 13,
@@ -40,13 +39,21 @@ function App() {
     address: "191, Block D, Bashundhara R/A, Dhaka",
     receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
     recommendedVaccines: ["Flu", "Tetanus"],
-  };
-  
+  });
+
+  const [availableVaccines, setAvailableVaccines] = useState([
+    "Flu",
+    "Tetanus",
+    "Covid-19",
+    "Measles",
+    "Cholera",
+  ]);
+
   useEffect(() => {
     document.title = "Vaccination";
   }, []);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -58,7 +65,7 @@ function App() {
   return (
     <div className="App">
       {isAuthenticated && <Sidebar authenticateFunction={setIsAuthenticated} />}
-      {isAuthenticated && <SidebarRight/>}
+      {isAuthenticated && <SidebarRight />}
       <div className="main-content">
         <TransitionGroup>
           <CSSTransition
@@ -70,19 +77,33 @@ function App() {
               <Route
                 path="/"
                 element={
-                  isAuthenticated ? <DashboardPage elderly={Rafid} caretaker={Hasib} /> : <Navigate to="/login" />
+                  isAuthenticated ? (
+                    <DashboardPage
+                      elderly={Rafid}
+                      caretaker={Hasib}
+                      setElderly={setRafid}
+                      setCaretaker={setHasib}
+                    />
+                  ) : (
+                    <Navigate to="" />
+                  )
                 }
               />
               <Route
-                path="/about"
+                path="/vaccination"
                 element={
-                  isAuthenticated ? <AboutPage /> : <Navigate to="/login" />
-                }
-              />
-              <Route
-                path="/contact"
-                element={
-                  isAuthenticated ? <ContactPage /> : <Navigate to="/login" />
+                  isAuthenticated ? (
+                    <VaccinationPage
+                      elderly={Rafid}
+                      caretaker={Hasib}
+                      availableVaccines={availableVaccines}
+                      setElderly={setRafid}
+                      setCaretaker={setHasib}
+                      setAvailableVaccines={setAvailableVaccines}
+                    />
+                  ) : (
+                    <Navigate to="/login" />
+                  )
                 }
               />
               <Route
@@ -105,7 +126,7 @@ function App() {
           </CSSTransition>
         </TransitionGroup>
       </div>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 }
