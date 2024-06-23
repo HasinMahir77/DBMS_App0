@@ -136,7 +136,7 @@ function App() {
                 }
               />
               <Route
-                path="/medical-data"
+                path="/medicaldata"
                 element={
                   isAuthenticated ? (
                     <MedicalDataPage />

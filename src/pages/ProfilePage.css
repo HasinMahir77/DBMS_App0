@@ -1,15 +1,6 @@
 /* src/pages/ProfilePage.css */
-.profile-page-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #e0e7ff;
-}
-
 .profile-page {
   padding: 40px;
-  width: 100%;
   max-width: 800px;
   margin: 0 auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
