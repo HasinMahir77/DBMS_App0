@@ -4,21 +4,19 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  padding: 20px;
+  background-color: #f8f9fa;
+  width: 75vw;
   position: relative;
-  bottom: 28vh;
-  left: 5vw
-
+  left: 20vw;
+  bottom: 20vh;
 }
 
-.certificates-page .table {
-  margin-top: 20px;
-  width: 90%; /* Adjusted width to cover more area */
-  max-width: 1200px; /* Set a maximum width for responsiveness */
-  font-size: 18px; /* Larger font size */
+.certificates-page h2 {
+  margin-bottom: 20px;
 }
 
-.certificates-page .table th,
-.certificates-page .table td {
-  vertical-align: middle; /* Center content vertically */
-  padding: 12px; /* Increase padding for better spacing */
+.certificates-table {
+  width: 80%;
+  font-size: 1.2em;
 }

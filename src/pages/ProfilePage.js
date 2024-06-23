@@ -1,48 +1,90 @@
-// src/pages/ProfilePage.js
 import React, { useState } from "react";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import "./ProfilePage.css";
 
-function ProfilePage({ elderly, setElderly }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [newAddress, setNewAddress] = useState(elderly.address);
+const ProfilePage = ({ elderly, caretaker, setElderly, setCaretaker }) => {
+  const [isEditingElderly, setIsEditingElderly] = useState(false);
+  const [isEditingCaretaker, setIsEditingCaretaker] = useState(false);
+  const [elderlyAddress, setElderlyAddress] = useState(elderly.address);
+  const [caretakerAddress, setCaretakerAddress] = useState(caretaker.address);
 
-  const handleEditClick = () => {
-    setIsEditing(true);
+  const handleElderlySave = () => {
+    setElderly({ ...elderly, address: elderlyAddress });
+    setIsEditingElderly(false);
   };
 
-  const handleSaveClick = () => {
-    setElderly({ ...elderly, address: newAddress });
-    setIsEditing(false);
-  };
-
-  const handleChange = (e) => {
-    setNewAddress(e.target.value);
+  const handleCaretakerSave = () => {
+    setCaretaker({ ...caretaker, address: caretakerAddress });
+    setIsEditingCaretaker(false);
   };
 
   return (
     <div className="profile-page">
-      <h1>Profile Page</h1>
-      <div className="profile-info">
-        <p>First Name: {elderly.fname}</p>
-        <p>Last Name: {elderly.lname}</p>
-        <p>
-          Address:
-          {isEditing ? (
-            <input type="text" value={newAddress} onChange={handleChange} />
+      <h2 className="text-center">Profile</h2>
+      <div className="profile-section">
+        <h4>Elderly Information</h4>
+        <div>
+          <strong>First Name:</strong> {elderly.fname}
+        </div>
+        <div>
+          <strong>Last Name:</strong> {elderly.lname}
+        </div>
+        <div>
+          <strong>Address:</strong>
+          {isEditingElderly ? (
+            <Form.Control
+              type="text"
+              value={elderlyAddress}
+              onChange={(e) => setElderlyAddress(e.target.value)}
+            />
           ) : (
-            <span>{elderly.address}</span>
+            elderly.address
           )}
-        </p>
-        <p>Age: 65</p>
-        <p>NID: {elderly.nid}</p>
-        {isEditing ? (
-          <button onClick={handleSaveClick}>Save</button>
+        </div>
+        <div>
+          <strong>Age:</strong> {new Date().getFullYear() - elderly.yob}
+        </div>
+        <div>
+          <strong>NID:</strong> {elderly.nid}
+        </div>
+        {isEditingElderly ? (
+          <Button onClick={handleElderlySave}>Save</Button>
         ) : (
-          <button onClick={handleEditClick}>Edit Address</button>
+          <Button onClick={() => setIsEditingElderly(true)}>Edit</Button>
+        )}
+      </div>
+
+      <div className="profile-section">
+        <h4>Caretaker Information</h4>
+        <div>
+          <strong>First Name:</strong> {caretaker.fname}
+        </div>
+        <div>
+          <strong>Last Name:</strong> {caretaker.lname}
+        </div>
+        <div>
+          <strong>Address:</strong>
+          {isEditingCaretaker ? (
+            <Form.Control
+              type="text"
+              value={caretakerAddress}
+              onChange={(e) => setCaretakerAddress(e.target.value)}
+            />
+          ) : (
+            caretaker.address
+          )}
+        </div>
+        <div>
+          <strong>Age:</strong> {new Date().getFullYear() - caretaker.yob}
+        </div>
+        {isEditingCaretaker ? (
+          <Button onClick={handleCaretakerSave}>Save</Button>
+        ) : (
+          <Button onClick={() => setIsEditingCaretaker(true)}>Edit</Button>
         )}
       </div>
     </div>
   );
-}
+};
 
 export default ProfilePage;

@@ -43,8 +43,6 @@ function App() {
     mob: 3,
     yob: 2002,
     address: "191, Block D, Bashundhara R/A, Dhaka",
-    receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
-    recommendedVaccines: ["Flu", "Tetanus"],
   });
 
   const [availableVaccines, setAvailableVaccines] = useState([
@@ -53,21 +51,6 @@ function App() {
     "Covid-19",
     "Measles",
     "Cholera",
-  ]);
-
-  const [certificates, setCertificates] = useState([
-    {
-      name: "Covid-19",
-      numberOfDoses: 2,
-      dosesCompleted: 2,
-      dateOfLastDose: "2021-05-12",
-    },
-    {
-      name: "Flu",
-      numberOfDoses: 1,
-      dosesCompleted: 1,
-      dateOfLastDose: "2022-10-25",
-    },
   ]);
 
   useEffect(() => {
@@ -126,16 +109,6 @@ function App() {
                 }
               />
               <Route
-                path="/profile"
-                element={
-                  isAuthenticated ? (
-                    <ProfilePage elderly={Rafid} setElderly={setRafid} />
-                  ) : (
-                    <Navigate to="/login" />
-                  )
-                }
-              />
-              <Route
                 path="/medicaldata"
                 element={
                   isAuthenticated ? (
@@ -149,7 +122,22 @@ function App() {
                 path="/certificates"
                 element={
                   isAuthenticated ? (
-                    <CertificatesPage certificates={certificates} />
+                    <CertificatesPage />
+                  ) : (
+                    <Navigate to="/login" />
+                  )
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  isAuthenticated ? (
+                    <ProfilePage
+                      elderly={Rafid}
+                      caretaker={Hasib}
+                      setElderly={setRafid}
+                      setCaretaker={setHasib}
+                    />
                   ) : (
                     <Navigate to="/login" />
                   )
@@ -175,7 +163,7 @@ function App() {
           </CSSTransition>
         </TransitionGroup>
       </div>
-      <Footer />
+      <Footer></Footer>
     </div>
   );
 }
