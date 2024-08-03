@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   BrowserRouter as Router,
   Routes,
@@ -23,6 +24,13 @@ import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
+  //Actual user data from database
+  const [elderly, setElderly] = useState({});
+  const setElderlyP = (val)=>{
+    console.log(val);
+    setElderly(val);
+  }
+  //------------
   const [Rafid, setRafid] = useState({
     fname: "Rafid",
     lname: "Alam",
@@ -57,7 +65,7 @@ function App() {
     document.title = "Vaccination";
   }, []);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -155,7 +163,7 @@ function App() {
                   isAuthenticated ? (
                     <DashboardPage elderly={Rafid} caretaker={Hasib} />
                   ) : (
-                    <LoginPage onLogin={handleLoginComplete} />
+                    <LoginPage onLogin={handleLoginComplete} setElderly = {setElderlyP} />
                   )
                 }
               />
