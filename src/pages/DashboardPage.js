@@ -8,7 +8,7 @@ import { Pie } from "react-chartjs-2";
 
 
 
-export default function DsahboardPage({elderly, caretaker}) {
+export default function DsahboardPage({elderly, caretaker, appointment}) {
   ChartJS.register(ArcElement, Tooltip, Legend);
   const pieData = {
     labels: ["Vaccinated", "Not Vaccinated"],
@@ -62,24 +62,25 @@ export default function DsahboardPage({elderly, caretaker}) {
             <div className="personalInfo">
               <span>
                 Name:{" "}
-                {elderly.fname ? elderly.fname + " " + elderly.lname : "N/A"}
+                {elderly.FName ? elderly.FName + " " + elderly.LName : "N/A"}
               </span>
               <span>
                 DOB:{" "}
-                {elderly.dob
-                  ? `${elderly.dob}.${elderly.mob}.${elderly.yob}`
+                {elderly.DobD
+                  ? `${elderly.DobD}.${elderly.DobM}.${elderly.DobY}`
                   : "N/A"}
               </span>
               <span>
                 Caretaker:{" "}
-                {caretaker.fname
-                  ? caretaker.fname + " " + caretaker.lname
+                {caretaker.FName
+                  ? caretaker.FName + " " + caretaker.LName
                   : "N/A"}
               </span>
             </div>
             <div className="appointmentInfo">
               <span>Appointments</span>
-              <span>NONE</span>
+      
+              <span>{appointment? JSON.stringify(appointment):"..."}</span>
             </div>
           </div>
         </div>

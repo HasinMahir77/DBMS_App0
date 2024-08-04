@@ -2,9 +2,9 @@ import './LoginPage.css';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function LoginPage({ onLogin, setElderly }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+function LoginPage({ onLogin, setElderly, setCaretaker }) {
+  const [username, setUsername] = useState("1111222233");
+  const [password, setPassword] = useState("12345678");
   const [error, setError] = useState("");
 
    const handleSubmit = async (e) => {
@@ -18,7 +18,7 @@ function LoginPage({ onLogin, setElderly }) {
        if (response.data.success) {
         console.log("Credentials matched")
          // Call onLogin if login is successful
-         onLogin();
+         onLogin(response.data.elderly,response.data.caretaker);
        } else {
          // Show an error message if login failed
          setError("Invalid credentials");

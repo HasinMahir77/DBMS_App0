@@ -22,21 +22,6 @@ db.connect((err) => {
   console.log("Connected to the database as id " + db.threadId);
 });
 
-// app.get("/", (req,res)=>{
-//   res.json("Hello")
-// })
-// app.get("/ching", (req, res) => {
-//   const q = "SELECT * FROM elderly";
-//   db.query(q, (err, data) => {
-//     // Corrected this line
-//     if (err) {
-//       console.error("Error fetching data:", err);
-//       return res.status(500).json({ error: "Internal server error" });
-//     }
-//     return res.json(data);
-//   });
-// });
-
 
 
 // Create a new record in a table (POST /data/:tableName)
@@ -110,40 +95,80 @@ app.delete('/data/:tableName/:id', (req, res) => {
 });
 
 // Endpoint to handle login requests
-app.post('/login', (req, res) => {
+app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
-  // SQL query to check if there is a matching user
-  const query = 'SELECT * FROM elderly WHERE ElderlyNid = ? AND Password = ?';
-  db.query(query, [username, password], (err, results) => {
-    if (err) {
-      console.error("Error during login:", err);
-      return res
-        .status(500)
-        .json({ success: false, message: "Internal server error" });
-    }
+  try {
+    // Check if the user exists
+    const [userResults] = await db
+      .promise()
+      .query("SELECT * FROM elderly WHERE ElderlyNid = ? AND Password = ?", [
+        username,
+        password,
+      ]);
 
-    if (results.length > 0) {
-      var elderly;
-      // If a user is found, return success
-      try{
-        query2 =
-        "SELECT * FROM elderly INNER JOIN person ON elderly.ElderlyNid = person.Nid WHERE ElderlyNid = ?";
-      db.query(query2, [username], (err, results) => {
-        if(err){console.log(err)}
-        else{elderly = results[0]}
-        console.log(elderly);
+    if (userResults.length > 0) {
+      const elderlyNid = userResults[0].ElderlyNid;
+
+      // Get elderly details
+      const [elderlyResults] = await db
+        .promise()
+        .query(
+          "SELECT * FROM elderly INNER JOIN person ON elderly.ElderlyNid = person.Nid WHERE ElderlyNid = ?",
+          [elderlyNid]
+        );
+      const elderly = elderlyResults[0];
+
+      // Get caretaker details
+      const [caretakerResults] = await db
+        .promise()
+        .query(
+          "SELECT * FROM caretaker INNER JOIN person ON caretaker.CaretakerNid = person.Nid WHERE CaretakerNid = ?",
+          [elderly.CaretakerNid]
+        );
+      const caretaker = caretakerResults[0];
+
+      // Log the results
+      console.log("Elderly:", elderly);
+      console.log("Caretaker:", caretaker);
+
+      // Send the response
+      res.json({
+        success: true,
+        message: "Login successful",
+        elderly: elderly,
+        caretaker: caretaker,
       });
-
-      }
-      catch(err){console.log(err)}
-      res.json({ success: true, user: "Me", message: "Login successful" });
     } else {
-      // If no user is found, return failure
       res.json({ success: false, message: "Invalid credentials" });
-      console.log(res);
+      console.log("Invalid credentials");
     }
+  } catch (err) {
+    console.error("Error during login:", err);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
+
+// Fetch appointments of a specific elderly
+app.get("/appointments/:elderlyNid", async (req, res) => {
+  var elderlyNid = req.params.elderlyNid;
+  const query = "SELECT * FROM appointment WHERE ElderlyNid = ?";
+
+  const appointments = await db.promise().query(query, [elderlyNid]);
+
+  
+  db.query(query, [elderlyNid], (err, results) => {
+    if (err) {
+      console.error("Error fetching appointments:", err);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+    console.log("Appointments:")
+    console.log(results);
+    res.json(results);
   });
+
+
+  
 });
 
 // Start the server

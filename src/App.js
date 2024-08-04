@@ -26,32 +26,28 @@ import "./App.css";
 function App() {
   //Actual user data from database
   const [elderly, setElderly] = useState({});
-  const setElderlyP = (val)=>{
-    console.log(val);
-    setElderly(val);
-  }
-  //------------
-  const [Rafid, setRafid] = useState({
-    fname: "Rafid",
-    lname: "Alam",
-    dob: 13,
-    mob: 3,
-    yob: 1940,
-    nid: 123124515,
-    address: "191, Block D, Bashundhara R/A, Dhaka",
-    receivedVaccines: ["MMR", "Flu 2020", "Covid-19"],
-    recommendedVaccines: ["Flu", "Tetanus"],
-    appointment: { appointed: false, center: null, date: null, time: null },
-  });
+  const [caretaker, setCaretaker] = useState({});
+  const [appointments, setAppointments] = useState({});
+//Fetching appointments
+const fetchAppointments = async () => {
+  if (!elderly.ElderlyNid) return; // Ensure we have the ElderlyNid before making the request
 
-  const [Hasib, setHasib] = useState({
-    fname: "Hasib",
-    lname: "Islam",
-    dob: 13,
-    mob: 3,
-    yob: 2002,
-    address: "191, Block D, Bashundhara R/A, Dhaka",
-  });
+  try {
+    const response = await axios.get(
+      `http://localhost:8800/appointments/${elderly.ElderlyNid}`
+    );
+    setAppointments(response.data);
+    console.log(elderly.ElderlyNid)
+    console.log("Fetched Appointments:", appointments); // Log the appointments
+  } catch (error) {
+    console.error("Error fetching appointments:", error);
+  }
+};
+  useEffect(() => {
+    fetchAppointments();
+  }, [elderly.ElderlyNid]);
+  
+  //------------
 
   const [availableVaccines, setAvailableVaccines] = useState([
     "Flu",
@@ -69,9 +65,14 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleLoginComplete = () => {
-    setIsAuthenticated(true);
-    navigate("/");
+  function handleLoginComplete(elderly,caretaker) {
+    setElderly(elderly);
+    setCaretaker(caretaker);
+    // Fetch appointments and only proceed after fetching
+    fetchAppointments().then(() => {
+      setIsAuthenticated(true);
+      navigate("/");
+    });
   };
 
   return (
@@ -90,7 +91,7 @@ function App() {
                 path="/"
                 element={
                   isAuthenticated ? (
-                    <DashboardPage elderly={Rafid} caretaker={Hasib} />
+                    <DashboardPage elderly={elderly} caretaker={caretaker} appointment={appointments} />
                   ) : (
                     <Navigate to="/login" />
                   )
@@ -101,8 +102,8 @@ function App() {
                 element={
                   isAuthenticated ? (
                     <VaccinationPage
-                      elderly={Rafid}
-                      caretaker={Hasib}
+                      elderly={elderly}
+                      caretaker={caretaker}
                       availableVaccines={availableVaccines}
                     />
                   ) : (
@@ -141,10 +142,10 @@ function App() {
                 element={
                   isAuthenticated ? (
                     <ProfilePage
-                      elderly={Rafid}
-                      caretaker={Hasib}
-                      setElderly={setRafid}
-                      setCaretaker={setHasib}
+                      elderly={elderly}
+                      caretaker={caretaker}
+                      setElderly={setElderly}
+                      setCaretaker={setCaretaker}
                     />
                   ) : (
                     <Navigate to="/login" />
@@ -161,9 +162,11 @@ function App() {
                 path="/login"
                 element={
                   isAuthenticated ? (
-                    <DashboardPage elderly={Rafid} caretaker={Hasib} />
+                    <DashboardPage elderly={elderly} caretaker={caretaker} />
                   ) : (
-                    <LoginPage onLogin={handleLoginComplete} setElderly = {setElderlyP} />
+                    <LoginPage
+                      onLogin={handleLoginComplete}
+                    />
                   )
                 }
               />
